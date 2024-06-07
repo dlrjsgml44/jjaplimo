@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="alimoyellow">#F7D04F</color>
+    <color name="select_back">#F4F5F9</color>
+    <color name="alimo_btn">#F7D04F</color>
+    <color name="alimo_nono">#F1F2F6</color>
+    <color name="btn_color">#AAAAAA</color>
+    <color name="btn_off">#EEEEEE</color>
+    <color name="hint_off">#909090</color>
+</resources>
