@@ -51,10 +51,10 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val contentLists = ArrayList<AlimData>()
-        val gradeLists = ArrayList<GradeData>()
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater)
+
+        goInternet()
         networkStatusHelper = NetworkMan(requireContext())
         networkStatusHelper.observe(viewLifecycleOwner, Observer { isConnected ->
             if (isConnected) {
@@ -68,7 +68,17 @@ class HomeFragment : Fragment() {
 
 
 
+
 // Adding the divider
+        binding.writeman.setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.main_container, AddFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
+
         val dividerItemDecoration =
             DividerItemDecoration(binding.rvViews.context, LinearLayoutManager.VERTICAL)
         binding.rvViews.addItemDecoration(dividerItemDecoration)

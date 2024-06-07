@@ -51,7 +51,13 @@ class MyFragment : Fragment(){
         binding = FragmentMyBinding.inflate(inflater)
 
 
-
+        binding.writeBtn.setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.main_container, AddFragment())
+            fragmentTransaction.addToBackStack(null) // 뒤로가기 스택에 추가
+            fragmentTransaction.commit()
+        }
         binding.logOut.setOnClickListener {
             MyApplication.prefs.setBoolean("isLogined", false)
             Log.d("TAG", "dlrjsgml44 Ok");
