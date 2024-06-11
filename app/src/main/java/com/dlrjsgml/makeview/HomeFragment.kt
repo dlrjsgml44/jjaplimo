@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.dlrjsgml.makeview.databinding.FragmentHomeBinding
 import com.google.android.material.appbar.AppBarLayout
 import retrofit2.Call
@@ -28,6 +28,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -48,6 +49,15 @@ class HomeFragment : Fragment() {
         }
     }
 
+
+    fun refreshFragment() {
+        val fragmentTransaction = parentFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.main_container, HomeFragment())
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,7 +73,7 @@ class HomeFragment : Fragment() {
         })
 
         binding.refresh.setOnRefreshListener {
-            goInternet()
+            refreshFragment()
             binding.refresh.isRefreshing = false
         }
         binding.appbars.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -78,15 +88,15 @@ class HomeFragment : Fragment() {
 //        binding.rvViews.adapter = AlimAdapter(contentLists)
 //        binding.rvViews.layoutManager = LinearLayoutManager(context)
 
-//
-//        binding.writeman.setOnClickListener {
-//            val fragmentManager = requireActivity().supportFragmentManager
-//            val fragmentTransaction = fragmentManager.beginTransaction()
-//            fragmentTransaction.replace(R.id.main_container, AddFragment())
-//            fragmentTransaction.addToBackStack(null)
-//            fragmentTransaction.commit()
-//        }
-//
+
+        binding.writeman.setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.main_container, AddFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
 
         val dividerItemDecoration =
             DividerItemDecoration(binding.rvViews.context, LinearLayoutManager.VERTICAL)
