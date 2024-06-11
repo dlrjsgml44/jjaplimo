@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dlrjsgml.makeview.databinding.FragmentHomeBinding
+import com.google.android.material.appbar.AppBarLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,7 +55,6 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater)
 
-        goInternet()
         networkStatusHelper = NetworkMan(requireContext())
         networkStatusHelper.observe(viewLifecycleOwner, Observer { isConnected ->
             if (isConnected) {
@@ -62,22 +62,31 @@ class HomeFragment : Fragment() {
             }
         })
 
+        binding.refresh.setOnRefreshListener {
+            goInternet()
+            binding.refresh.isRefreshing = false
+        }
+        binding.appbars.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            binding.refresh.isEnabled = verticalOffset == 0
+        })
+
+        val recyclerView = binding.rvViews
+        recyclerView.adapter = AlimAdapter(emptyList())
+        val GraderecyclerView = binding.rvGrade
+        GraderecyclerView.adapter = GradeAdapter(emptyList())
+        goInternet()
 //        binding.rvViews.adapter = AlimAdapter(contentLists)
 //        binding.rvViews.layoutManager = LinearLayoutManager(context)
 
-
-
-
-
-// Adding the divider
-        binding.writeman.setOnClickListener {
-            val fragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.main_container, AddFragment())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        }
-
+//
+//        binding.writeman.setOnClickListener {
+//            val fragmentManager = requireActivity().supportFragmentManager
+//            val fragmentTransaction = fragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.main_container, AddFragment())
+//            fragmentTransaction.addToBackStack(null)
+//            fragmentTransaction.commit()
+//        }
+//
 
         val dividerItemDecoration =
             DividerItemDecoration(binding.rvViews.context, LinearLayoutManager.VERTICAL)
@@ -115,15 +124,18 @@ class HomeFragment : Fragment() {
 
 
         val GraderecyclerView = binding.rvGrade
-        GraderecyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        GraderecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         apiService.getGrades().enqueue(object : Callback<List<GradeData>> {
-            override fun onResponse(call: Call<List<GradeData>>, response: Response<List<GradeData>>) {
+            override fun onResponse(
+                call: Call<List<GradeData>>,
+                response: Response<List<GradeData>>
+            ) {
                 if (response.isSuccessful) {
                     val gradList = response.body()!!
-                    if(gradList.size == 0){
+                    if (gradList.size == 0) {
                         binding.maple.text = "먼가 오류가 있습니다."
-                    }
-                    else{
+                    } else {
                         binding.isInternet.isVisible = false
                         GraderecyclerView.adapter = GradeAdapter(gradList)
                         Log.d("TAG", "$gradList");
