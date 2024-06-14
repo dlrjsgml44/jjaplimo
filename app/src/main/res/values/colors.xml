@@ -10,5 +10,6 @@
     <color name="btn_off">#EEEEEE</color>
     <color name="hint_off">#909090</color>
     <color name="amo_gray">#FDFDFD</color>
+    <color name="good_gray">#E5E5E5</color>
 
 </resources>

@@ -27,6 +27,7 @@
                     android:layout_marginBottom="3dp"
                     app:contentScrim="@color/white"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                    app:scrimAnimationDuration="0"
                     app:statusBarScrim="@color/white">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,8 +90,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
-                    android:paddingVertical="10dp"
                     android:orientation="horizontal"
+                    android:paddingVertical="10dp"
                     app:layout_constraintTop_toBottomOf="@id/speaks"
                     tools:listitem="@layout/rvgradeitem" />
             </com.google.android.material.appbar.AppBarLayout>
@@ -131,6 +132,7 @@
                 android:id="@+id/rvViews"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:listitem="@layout/mainrvitem" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

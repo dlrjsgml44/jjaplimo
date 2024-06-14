@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/gradejob"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="17dp"
         android:paddingVertical="5dp"
         android:text="1학년"
         app:layout_constraintStart_toStartOf="parent"

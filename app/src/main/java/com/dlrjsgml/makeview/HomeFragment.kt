@@ -50,6 +50,7 @@ class HomeFragment : Fragment() {
     }
 
 
+
     fun refreshFragment() {
         val fragmentTransaction = parentFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.main_container, HomeFragment())
@@ -61,7 +62,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater)
 
@@ -84,7 +85,7 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = AlimAdapter(emptyList())
         val GraderecyclerView = binding.rvGrade
         GraderecyclerView.adapter = GradeAdapter(emptyList())
-        goInternet()
+
 //        binding.rvViews.adapter = AlimAdapter(contentLists)
 //        binding.rvViews.layoutManager = LinearLayoutManager(context)
 

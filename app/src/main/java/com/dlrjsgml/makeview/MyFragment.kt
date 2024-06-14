@@ -50,7 +50,6 @@ class MyFragment : Fragment(){
         // Inflate the layout for this fragment
         binding = FragmentMyBinding.inflate(inflater)
 
-
         binding.writeBtn.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
