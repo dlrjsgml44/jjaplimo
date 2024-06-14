@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        MyApplication.prefs.setBoolean("isLogined", true)
 
         // 첫 화면 초기화 HomeFragment
         supportFragmentManager.beginTransaction()

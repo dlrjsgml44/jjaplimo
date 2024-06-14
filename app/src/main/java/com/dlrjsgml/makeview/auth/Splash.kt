@@ -12,7 +12,7 @@ import com.dlrjsgml.makeview.MyApplication
 import com.dlrjsgml.makeview.R
 
 class Splash : AppCompatActivity() {
-    val TAG: String = "로그"
+    val TAG: String = "어떻게"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
